@@ -6,5 +6,13 @@ app = Flask(__name__)
 def inicio():
     return "Olá, mundo!"
 
+@app.route('/sobre')
+def sobre():
+    return "Gestão de Eventos - DW2."
+
+@app.route('/eventos')
+def eventos():
+    return "Lista de eventos aqui."
+
 if __name__ == '__main__':
     app.run(debug=True)
