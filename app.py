@@ -1,7 +1,10 @@
 from flask import Flask
 from controllers.evento_controller import evento_bp
 
+from data.banco import iniciar
+
 app = Flask(__name__)
+iniciar()
 # Registra as rotas que agora ficam no Controller.
 app.register_blueprint(evento_bp)
 
