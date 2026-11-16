@@ -1,18 +1,17 @@
 from flask import Flask
+from controllers.evento_controller import evento_bp
 
 app = Flask(__name__)
+# Registra as rotas que agora ficam no Controller.
+app.register_blueprint(evento_bp)
 
-@app.route('/')
+@app.get("/")
 def inicio():
     return "Olá, mundo!"
 
-@app.route('/sobre')
+@app.get("/sobre")
 def sobre():
     return "Gestão de Eventos - DW2."
 
-@app.route('/eventos')
-def eventos():
-    return "Lista de eventos aqui."
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
