@@ -1,10 +1,13 @@
 from flask import Flask
 from controllers.evento_controller import evento_bp
 
-from data.banco import iniciar
+from extensions import db
 
 app = Flask(__name__)
-iniciar()
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///eventos.db"
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 # Registra as rotas que agora ficam no Controller.
 app.register_blueprint(evento_bp)
 
