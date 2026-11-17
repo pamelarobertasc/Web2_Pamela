@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, abort, redirect, url_for
 from models.evento import Evento
 from dao.evento_dao import EventoDAO
 
@@ -13,3 +13,22 @@ def index():
         EventoDAO.salvar(evento)
         return redirect(url_for("evento.index"))
     return render_template("index.html", eventos=EventoDAO.listar())
+
+@evento_bp.route("/editar/<int:id>", methods=["GET", "POST"])
+def editar(id):
+    evento = EventoDAO.buscar_por_id(id)
+    if evento is None:
+        abort(404)
+    if request.method == "POST":
+        EventoDAO.atualizar(evento, request.form["nome"], request.form["data"],
+                            request.form["local"])
+        return redirect(url_for("evento.index"))
+    return render_template("editar.html", evento=evento)
+
+@evento_bp.post("/excluir/<int:id>")
+def excluir(id):
+    evento = EventoDAO.buscar_por_id(id)
+    if evento is None:
+        abort(404)
+    EventoDAO.excluir(evento)
+    return redirect(url_for("evento.index"))

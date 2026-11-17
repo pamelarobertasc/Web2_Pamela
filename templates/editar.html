@@ -1,0 +1,12 @@
+<!doctype html>
+<html lang="pt-BR">
+    <meta charset="utf-8">
+    <title>Eventos Acadêmicos</title>
+    <h1>Editar evento</h1>
+    <form method="post">
+        <label>Nome <input name="nome" value="{{ evento.nome if evento else '' }}" required></label>
+        <label>Data <input name="data" type="date" value="{{ evento.data if evento else '' }}" required></label>
+        <label>Local <input name="local" value="{{ evento.local if evento else '' }}" required></label>
+        <button>Salvar</button>
+    </form>
+</html>

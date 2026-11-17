@@ -11,7 +11,12 @@
     </form>
     <ul>
         {% for e in eventos %}
-            <li>{{ e.nome }} — {{ e.data }} — {{ e.local }}</li>
+        <li>{{ e.nome }} — {{ e.data }} — {{ e.local }}
+            <a href="{{ url_for('evento.editar', id=e.id) }}">Editar</a>
+            <form method="post" action="{{ url_for('evento.excluir', id=e.id) }}">
+                <button>Excluir</button>
+            </form>
+        </li>
         {% endfor %}
     </ul>
 </html>
